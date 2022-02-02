@@ -3,9 +3,9 @@
 Hello and welcome to Shaberi...
 {% if user.is_authenticated %}
 <br>{{ user.username }}
-<a href="{% url 'logout' %}">LogOut</a>
+<a href="{% url 'logout' %}">LogOUT</a>
 {% else %}
-<a href="{% url 'user_login' %}">Login</a>/
-<a href="{% url 'register' %}">Register Here</a>
+<a href="{% url 'user_login' %}">LogIN</a>/
+<a href="{% url 'register' %}">SignUP</a>
 {% endif %}
 {% endblock content %}

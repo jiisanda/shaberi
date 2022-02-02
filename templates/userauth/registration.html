@@ -16,6 +16,7 @@
         {{ profile_form.as_p }}
         <input type="submit" name="" value="Register">
     </form>
+    <p>Already have an account <a href="{% url 'user_login' %}">LogIN</a> instead.</p>
 {% endif %}
 
 {% endblock content %}
