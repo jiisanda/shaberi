@@ -1,0 +1,23 @@
+{% extends 'chats_app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if registered %}
+    <h1>Thanks for Signing UP !!!...</h1>
+    <p>Get to the chat...<a href="#">Here</a></p>
+{% else %}
+    <h1>Register Here</h1>
+    <h3>Fill out the form</h3>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <input type="submit" name="" value="Register">
+    </form>
+{% endif %}
+
+{% endblock content %}
+
+
