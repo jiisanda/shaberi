@@ -1,5 +1,6 @@
 {% extends 'chats_app\base.html' %}
 {% block content %}
+
 Hello and welcome to Shaberi...
 {% if user.is_authenticated %}
 <br>{{ user.username }}
@@ -8,4 +9,5 @@ Hello and welcome to Shaberi...
 <a href="{% url 'user_login' %}">LogIN</a>/
 <a href="{% url 'register' %}">SignUP</a>
 {% endif %}
+
 {% endblock content %}

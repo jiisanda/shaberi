@@ -1,0 +1,18 @@
+/* 
+        COLOR COMBINATIONS
+    #1c1c1c     - cod grey
+    #ebe8e4     - Cararra
+    #5ee79d     - Pastel Green
+    #5461ee     - Royal Blue
+    #be6944     - Crail
+*/
+
+
+body {
+    background-color: #1c1c1c;
+}
+
+#profile-card {
+    width:20rem; 
+    background-color:#ffffff;
+}

@@ -7,6 +7,11 @@ from django.core.validators import RegexValidator
 # Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(User,default=None, null=True, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.user.username
+
+class UserProfileInfo(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     # bio, number, picture
     bio = models.TextField(blank=True, null=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone Number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
@@ -14,4 +19,4 @@ class UserProfile(models.Model):
     profile_picture = models.ImageField(upload_to='profile_pics', blank=True, default='default_profile.jpg')
     
     def __str__(self):
-        return self.user.username
+        return str(self.user.username)

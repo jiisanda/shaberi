@@ -1,6 +1,8 @@
 # Custom
 chats_app/migrations
 userauth/migrations
+staticfiles
+chats_project/env.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
