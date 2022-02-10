@@ -38,14 +38,14 @@
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'logout' %}">LogOut&nbsp;&nbsp;</a>
+                        <a class="nav-link" href="{% url 'userauth:logout' %}">LogOut&nbsp;&nbsp;</a>
                     </li>
                     {% else %}
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'user_login' %}">LogIN</a>
+                        <a class="nav-link" href="{% url 'userauth:user_login' %}">LogIN</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'register' %}">SignUP</a>
+                        <a class="nav-link" href="{% url 'userauth:register' %}">SignUP</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -64,7 +64,7 @@
                             <a href="#">Public Chat</a>
                             <a href="#">Private Chat</a>
                         {% else %}
-                            <p>Login to chat</p>
+                            <p>Login to chat<br>and<br>Avail Options</p>
                         {% endif %}
                     </div>
                     <br>
