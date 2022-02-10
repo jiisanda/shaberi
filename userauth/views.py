@@ -1,11 +1,17 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, redirect
+
 from django.urls import reverse
 
+from django.views.generic import DetailView
+
 from userauth.forms import UserForm, ProfileForm
+from userauth.models import UserProfileInfo
 
 # Create your views here.
 @login_required
@@ -54,4 +60,13 @@ def registrationView(request):
         profile_form = ProfileForm()
     return render(request, 'userauth/registration.html', {'user_form':user_form,'profile_form':profile_form, 'registered':registered})
 
-        
+
+# class ShowProfileView(DetailView):
+#     model = UserProfileInfo
+#     template_name='chats_app/base.html'
+    
+#     def get_context_data(self, *args, **kwargs):
+#         user_section = UserProfileInfo.objects.all()
+#         context = super(ShowProfileView, self).get_context_data(*args, **kwargs)
+#         context["user_section"] = user_section
+#         return context

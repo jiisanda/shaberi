@@ -1,14 +1,33 @@
 {% extends 'chats_app\base.html' %}
+{% load static %}
 {% block content %}
-<form action="{% url 'user_login' %}" method="POST">
-    {% csrf_token %}
-    <label for="username">Username:</label>
-    <input type="text" name="username" placeholder="Enter Username">
+
+<!--CSS Style-->
+<link rel="stylesheet" href="{% static 'userauth/userauth.css' %}">
+
+<br>
+<div class="card text-center" id="card-login">
+    <img src="{% static 'chats_app/shaberi-dark.png' %}" alt="" width="40%" height="40%" class="d-inline-block align-text-top">
+    <h2>Login</h2>
     <br>
-    <label for="password">Password:</label>
-    <input type="password" name="password">
-    <br>
-    <input type="submit" name="" value="LogIn!">
-    <p>Don't have an account <a href="{% url 'register' %}">Sign UP</a> instead.</p>
-</form>
+    <form action="{% url 'user_login' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Enter Username" required="">
+            <label for="floatingInput username">Username:</label>
+        </div>
+        <br>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required="">
+            <label for="floatingPassword password">Password:</label>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary mb-3" id="btn-login"><span>LogIn! </span></button>
+        {% comment %} <input type="submit" id="btn-login" value="LogIn!"> {% endcomment %}
+        <br>
+        <br>
+            <p>Don't have an account <a href="{% url 'register' %}">Sign UP</a> instead.</p>
+        
+    </form>
+</div>
 {% endblock content %}
