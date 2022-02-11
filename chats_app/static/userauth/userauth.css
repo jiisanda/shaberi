@@ -48,5 +48,11 @@
 }
 
 /*Register-Card*/
-
+#card-register {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width:50rem;
+    padding-left: 18px;
+    border-radius: 20px;
+    box-shadow: 0 15px 25px rgba(121, 116, 116, 0.973);
+}
 
