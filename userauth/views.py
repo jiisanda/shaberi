@@ -10,10 +10,7 @@ from django.shortcuts import render, redirect
 
 from django.urls import reverse
 
-from django.views.generic import DetailView
-
 from userauth.forms import UserForm
-from userauth.models import UserProfileInfo
 
 # Create your views here.
 @login_required

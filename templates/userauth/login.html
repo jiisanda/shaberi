@@ -10,7 +10,7 @@
     <img src="{% static 'chats_app/shaberi-dark.png' %}" alt="" width="40%" height="40%" class="d-inline-block align-text-top">
     <h2>Login</h2>
     <br>
-    <form action="{% url 'user_login' %}" method="POST">
+    <form action="{% url 'userauth:user_login' %}" method="POST">
         {% csrf_token %}
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Enter Username" required="">

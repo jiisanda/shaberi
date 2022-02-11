@@ -1,14 +1,16 @@
 {% extends 'chats_app/base.html' %}
 {% load static %}
-
 {% block content %}
+<!--CSS Style-->
+<link rel="stylesheet" href="{% static 'userauth/userauth.css' %}">
+
 <br>
 {% if registered %}
     <h1>Thanks for Signing UP !!!...</h1>
     <p>Get to the chat...<a href="#">Here</a></p>
 {% else %}
-<div class="card text-center">
-    <h3>Register Here</h3>
+<div class="card text-center" id="card-register">
+    <h3>Register here!</h3>
 
     <form action="{% url 'userauth:register' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -54,9 +56,10 @@
                 </div>
             </div>
         </div>
-<br>
-        <input type="submit" name="" value="Register">
+<br><br>
+        <button type="submit" class="btn btn-primary mb-3" id="btn-login"><span>SignUP! </span></button>
     </form>
+    <br>
     <p>Already have an account <a href="{% url 'userauth:user_login' %}">LogIN</a> instead.</p>
 </div>
 {% endif %}
