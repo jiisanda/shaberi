@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-from .env import DEBUG, SECRET_KEY, ALLOWED_HOSTS
+from .env import DEBUG, SECRET_KEY, ALLOWED_HOSTS, ASGI_HOSTS
 import os
 from pathlib import Path
 
@@ -80,7 +80,7 @@ CHANNEL_LAYERS = {
         'BACKEND':'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             # "hosts": [('127.0.0.1', 6379)],
-            "hosts":[('redis://:msRcuJFcnahZYgfLiIby8JM6jTs6tHsa@redis-17240.c266.us-east-1-3.ec2.cloud.redislabs.com:17240')],
+            "hosts":[(ASGI_HOSTS)],
         },
     },
 }
