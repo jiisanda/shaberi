@@ -73,7 +73,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chats_project.wsgi.application'
 
+# Channels
 ASGI_APPLICATION = 'chats_project.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND':'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            # "hosts": [('127.0.0.1', 6379)],
+            "hosts":[('redis://:msRcuJFcnahZYgfLiIby8JM6jTs6tHsa@redis-17240.c266.us-east-1-3.ec2.cloud.redislabs.com:17240')],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
