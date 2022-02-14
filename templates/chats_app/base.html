@@ -57,7 +57,25 @@
         </div>
         <script src="" async defer></script>
     </body>
-    <div class="footer" style="background-color: #0d324d;">
+    {% comment %} <div class="footer" style="background-color: #0d324d;">
         <p>Made with ❤️ using Django</p>
-    </div>
+    </div> {% endcomment %}
+    {% comment %} <!-- Footer -->
+    
+    <footer class="page-footer">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3" style="background-color: #0d324d; 
+                                                            font-family: 'Courier New', Courier, monospace; 
+                                                            color:#ffffff;
+                                                            left:0;
+                                                            right:0;
+                                                            bottom:0;
+                                                            width:100%;">
+            © 2022 Copyright:
+            <a href="{% url 'chats_app:home' %}"> Shaberi</a>
+            <p>Made with ❤️ using Django</p>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer --> {% endcomment %}
 </html>
