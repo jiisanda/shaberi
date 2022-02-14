@@ -22,7 +22,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}">
+                <a class="navbar-brand" href="{% url 'chats_app:home' %}">
                     <img src="{% static 'chats_app/shaberi-dark.png' %}" alt="" width="40%" height="40%" class="d-inline-block align-text-top">
                 </a>
             </div>
@@ -33,7 +33,7 @@
                 <ul class="navbar-nav text-right">
                     {% if user.is_authenticated %}
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'chats_app:index' %}">
                             <img src="{% static 'chats_app/chat-bubble.png' %}" alt="" width="65%" height="65%">
                         </a>
                     </li>
@@ -52,31 +52,8 @@
             </div>
           </nav>
         <div class="container-fluid">
-        <div class="row">
-            <div class="col-3">
-                <br>
-                <div class="card" id="profile-card">
-                    <br>
-                    <div class="text-center">
-                        <br>
-                        {% if user.is_authenticated %}
-                            Hello <strong>{{ user.username }}</strong>!
-                            <a href="#">Public Chat</a>
-                            <a href="#">Private Chat</a>
-                        {% else %}
-                            <p>Login to chat<br>and<br>Avail Options</p>
-                        {% endif %}
-                    </div>
-                    <br>
-                </div>
-            </div>
-            <div class="col-9">
-                <div class="container-fluid">
-                    {% block content %}
-                    {% endblock content %}
-                </div>
-            </div>
-        </div>
+        {% block content %}
+        {% endblock content %}
         </div>
         <script src="" async defer></script>
     </body>

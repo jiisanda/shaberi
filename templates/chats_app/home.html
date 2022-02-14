@@ -1,15 +1,38 @@
 {% extends 'chats_app\base.html' %}
 {% block content %}
-<div class="about-shaberi">
-    <h1>About Shaberi...</h1>
-    <p>
-        This is the chating app.
-        You can add a Public as well as Private chat<br>
-        <b>These are the steps for having <em>Public Chat</em>...</b><br><br>
-        <b>These are the steps for having a <em>Private Chat</em>...</b> 
-    </p>
-</div>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <br>
+            <div class="card" id="profile-card">
+                <br>
+                <div class="text-center">
+                    <br>
+                    {% if user.is_authenticated %}
+                        Hello <strong>{{ user.username }}</strong>!
+                        <a href="#">Public Chat</a>
+                        <a href="#">Private Chat</a>
+                    {% else %}
+                        <p>Login to chat<br>and<br>Avail Options</p>
+                    {% endif %}
+                </div>
+                <br>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="container-fluid">
+                <div class="about-shaberi">
+                    <h1>About Shaberi...</h1>
+                    <p>
+                        This is the chating app.
+                        You can add a Public as well as Private chat<br>
+                        <b>These are the steps for having <em>Public Chat</em>...</b><br><br>
+                        <b>These are the steps for having a <em>Private Chat</em>...</b> 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock content %}
