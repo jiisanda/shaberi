@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -27,12 +27,18 @@ def user_login_view(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(reverse('home'))
+                return redirect('home')
+                # return HttpResponseRedirect(reverse('home')) 
             else:
-                print("LOGIN Failed !!!")
-                print(f"User: {username} and password: {password}")
-                messages.info(request,'invalid credentials')
-                return redirect('user_login')            # here error possibility
+                # print("LOGIN Failed !!!")
+                # print(f"User: {username} and password: {password}")
+                # messages.info(request,'invalid credentials')
+                # return redirect('user_login')            # here error possibility
+                return HttpResponse("ACCOUNT NOT ACTIVE")
+        else:
+            print("Someone tried to logon and failed...")
+            print(f"User: {username} and password {password}")
+            return HttpResponse("Invalid login details supplied!")
     else:
         return render(request, 'userauth/login.html', {})
 
@@ -76,7 +82,7 @@ def registrationView(request):
                 login(request, user)
 
                 # redirect to home page:
-                return HttpResponseRedirect(reverse('home'))
+                return HttpResponseRedirect(reverse('chats_app/home.html'))
     
     # No post data available, showing the same page
     else:
@@ -85,32 +91,3 @@ def registrationView(request):
     return render(request, template, {'form':form})
 
 
-
-    #     profile_form = ProfileForm(data=request.POST)
-    #     if user_form.is_valid() and profile_form.is_valid():
-    #         user = user_form.save()
-    #         user.set_password(user.password)
-    #         user.save()
-
-    #         profile = profile_form.save(commit=False)
-    #         if 'profile_picture' in request.FILES:
-    #             profile.profile_picture = request.FILES['profile_picture']
-    #         profile.save()
-    #         registered = True
-    #     else:
-    #         print(user_form.errors, profile_form.errors)
-    # else:
-    #     user_form = UserForm()
-    #     profile_form = ProfileForm()
-    # return render(request, 'userauth/registration.html', {'user_form':user_form,'profile_form':profile_form, 'registered':registered})
-
-
-# class ShowProfileView(DetailView):
-#     model = UserProfileInfo
-#     template_name='chats_app/base.html'
-    
-#     def get_context_data(self, *args, **kwargs):
-#         user_section = UserProfileInfo.objects.all()
-#         context = super(ShowProfileView, self).get_context_data(*args, **kwargs)
-#         context["user_section"] = user_section
-#         return context
