@@ -14,10 +14,11 @@ class ChatConsumer(WebsocketConsumer):
     def fetch_messages(self, data):
         messages = Message.last_20_messages()
         content = {
+            'command':'messages',
             'messages':self.messages_to_json(messages)
         }
         # print('fetch')
-        self.send_chat_message(content)
+        self.send_message(content)
     
     def new_message(self, data):
         author = data['from']
