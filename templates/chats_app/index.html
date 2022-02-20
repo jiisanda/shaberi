@@ -1,24 +1,32 @@
 {% extends 'chats_app\base.html' %}
+{% load static %}
 {% block content %}
+
+<!--CSS Style-->
+<link rel="stylesheet" href="{% static 'chats_app/index.css' %}">
 
 {% block title %}Chat Rooms{% endblock title %}
 
-What chat room would you like to enter?<br>
-    <input id="room-name-input" type="text" size="100"><br>
-    <input id="room-name-submit" type="button" value="Enter">
+<div class="card" id="card-room">
+    <div class="card-body">
+        <p>What chat room would you like to enter?<br></p>
+        <input class="form-control" id="room-name-input" type="text" size="100"><br>
+        <input class="btn btn-primary d-grid gap-2 col-6 mx-auto" id="room-name-submit" type="button" value="Enter">
+    </div>
+</div>
 
-    <script>
-        document.querySelector('#room-name-input').focus();
-        document.querySelector('#room-name-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#room-name-submit').click();
-            }
-        };
+<script>
+    document.querySelector('#room-name-input').focus();
+    document.querySelector('#room-name-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#room-name-submit').click();
+        }
+    };
 
-        document.querySelector('#room-name-submit').onclick = function(e) {
-            var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/chat/' + roomName + '/';
-        };
-    </script>
+    document.querySelector('#room-name-submit').onclick = function(e) {
+        var roomName = document.querySelector('#room-name-input').value;
+        window.location.pathname = '/chat/' + roomName + '/';
+    };
+</script>
 
 {% endblock content %}
