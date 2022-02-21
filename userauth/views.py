@@ -16,7 +16,7 @@ from userauth.forms import UserForm
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('home'))
+    return HttpResponseRedirect(reverse('chats_app:home'))
 
 
 def user_login_view(request):
@@ -27,13 +27,8 @@ def user_login_view(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect('home')
-                # return HttpResponseRedirect(reverse('home')) 
+                return HttpResponseRedirect(reverse('chats_app:home')) 
             else:
-                # print("LOGIN Failed !!!")
-                # print(f"User: {username} and password: {password}")
-                # messages.info(request,'invalid credentials')
-                # return redirect('user_login')            # here error possibility
                 return HttpResponse("ACCOUNT NOT ACTIVE")
         else:
             print("Someone tried to logon and failed...")
