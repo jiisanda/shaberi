@@ -3,7 +3,8 @@
 #card-login {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin-top: auto;
-    margin-left: auto;
+    margin: 0 auto;
+    float: none;
     margin-right: auto;
     align-items: center;
     padding-top: 2rem;
@@ -51,11 +52,20 @@
 #card-register {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     align-items: center;
-    margin-left: 22%;
-    width:50rem;
-    padding-left: 18px;
+    margin-left: 32%;
+    width:30rem;
+    margin: 0 auto;
+    float: none;
     border-radius: 20px;
     box-shadow: 0 15px 25px rgba(121, 116, 116, 0.973);
     background-color:#Eaf4fc;
+}
+
+#after-registration {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    align-items:center;
+    width:50rem;
+    margin: 0 auto;
+    float: none; 
 }
 

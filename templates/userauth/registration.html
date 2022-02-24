@@ -6,57 +6,20 @@
 
 <br>
 {% if registered %}
-    <h1>Thanks for Signing UP !!!...</h1>
-    <p>Get to the chat...<a href="#">Here</a></p>
+    <div class="card" id="after-registration">
+        <h1>Thanks for Signing UP !!!</h1>
+        <p>Login Once to chat <a href="{% url 'userauth:user_login' %}">Here</a></p>
+    </div>
 {% else %}
 <div class="card text-center" id="card-register" >
+    <br>
     <h3>Register here!</h3>
 
-    <form action="{% url 'userauth:register' %}" method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="row g-3">
-
-            {% if error_message %}
-                <p class="bg-danger p-d ml-b">{{ error_message }}</p>
-            {% endif %}
-            <!--First Name and Last Name-->
-            <div class="row g-3">
-                <div class="col form-floating">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="First Name*" required="">
-                    <label for="floatingInput {{ form.first_name.id_for_label }}">First Name*</label>
-                </div>
-                <div class="col form-floating">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="Last Name*">
-                    <label for="floatingInput {{ form.last_name.id_for_label }}">Last Name</label>
-                </div>
-            </div>
-            <!--Email and UserName-->
-            <div class="row g-3">
-                <div class="col form-floating">
-                    <input type="email" class="form-control" id="floatingInput" placeholder=" Name*" required="">
-                    <label for="floatingInput {{ form.email.id_for_label }}">Email*</label>
-                </div>
-                <div class="col form-floating">
-                    <div class="input-group">
-                        <div class="input-group-text">@</div>
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Username*">
-                    </div>
-                    <label class="visually-hidden" for="floatingInput {{ form.username.id_for_label }}">Username*</label>
-                </div>
-            </div>
-            <!--Password and repeat Password-->
-            <div class="row g-3">
-                <div class="col form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required="">
-                    <label for="floatingPassword {{ form.password.id_for_label }}">Password</label>
-                </div>
-                <div class="col form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password" required="">
-                    <label for="floatingPassword {{ form.password_repeat.id_for_label }}">Confirm Password</label>
-                </div>
-            </div>
-        </div>
-<br><br>
+        <br>
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
         <button type="submit" class="btn btn-primary mb-3" id="btn-login"><span>SignUP! </span></button>
     </form>
     <br>

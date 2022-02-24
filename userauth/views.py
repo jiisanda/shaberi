@@ -1,16 +1,13 @@
-from django.contrib.auth.models import User
-
 from django.http import HttpResponse, HttpResponseRedirect
 
-from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from django.urls import reverse
 
-from userauth.forms import UserForm
+from userauth.forms import UserForm, ProfileForm
 
 # Create your views here.
 @login_required
@@ -39,50 +36,33 @@ def user_login_view(request):
 
 
 def registrationView(request):
+    registered = False
     # if this is the POST request we need to process the form data
-    template = 'userauth/registration.html'
     if request.method == "POST":
         # creating a form instance and populate it with data from the request: 
-        form = UserForm(request.POST)
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
         # checking the form is valid
-        if form.is_valid():
-            if User.objects.filter(username=form.cleaned_data['username']).exists():
-                return render(request, template, {
-                    'form':form,
-                    'error_message':'Username already exists.'
-                })
-            elif User.objects.filter(email=form.cleaned_data['email']).exists():
-                return render(request, template, {
-                    'form':form,
-                    'error_message':'Email already exists.'
-                })
-            elif form.cleaned_data['password'] != form.cleaned_data['password_repeat']:
-                return render(request, template, {
-                    'form':form,
-                    'error_message':'Passwords do not match.'
-                })
-            else:
-                # Create the user:
-                user = User.objects.create_user(
-                    form.cleaned_data['username'],
-                    form.cleaned_data['email'],
-                    form.cleaned_data['password']
-                )
-                user.first_name = form.cleaned_data['first_name']
-                user.last_name = form.cleaned_data['last_name']
-                user.phone_number = form.cleaned_data['phone_number']
-                user.save()
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
 
-                # Login the user
-                login(request, user)
+            profile = profile_form.save(commit=False)
+            profile.user = user
 
-                # redirect to home page:
-                return HttpResponseRedirect(reverse('chats_app/home.html'))
-    
-    # No post data available, showing the same page
+            if 'profile_picture' in request.FILES:
+                profile.profile_picture = request.FILES['profile_picture']
+            profile.save()
+            registered = True
+        else:
+            print(user_form.errors, profile_form.errors)
     else:
-        form = UserForm()
-    
-    return render(request, template, {'form':form})
-
+        user_form = UserForm()
+        profile_form = ProfileForm()
+    return render(request, 'userauth/registration.html',
+                            {'user_form':user_form,
+                            'profile_form':profile_form,
+                            'registered':registered})
+            
 
