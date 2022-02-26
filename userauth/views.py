@@ -3,11 +3,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+from django.views.generic import UpdateView
+
 from django.shortcuts import render
 
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
-from userauth.forms import UserForm, ProfileForm
+from userauth.forms import UserForm, ProfileForm, ProfileEditForm
 
 # Create your views here.
 @login_required
@@ -65,4 +67,11 @@ def registrationView(request):
                             'profile_form':profile_form,
                             'registered':registered})
             
+class ProfileEditView(UpdateView):
+    form_class = ProfileEditForm
+    template_name = 'userauth/edit_profile.html'
+    success_url = reverse_lazy('chats_app:home')
 
+    def get_object(self):
+        return self.request.user
+    

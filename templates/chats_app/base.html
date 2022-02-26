@@ -20,21 +20,29 @@
     </head>
     
     <body>
+        
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'chats_app:home' %}">
-                    <img src="{% static 'chats_app/shaberi-dark.png' %}" alt="" width="40%" height="40%" class="d-inline-block align-text-top">
+                    <img src="{% static 'chats_app/shaberi-dark.png' %}" alt="" width="40%" height="40%" class="d-inline-block align-text-top" title="Shaberi-Home">
                 </a>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
                 <ul class="navbar-nav text-right">
                     {% if user.is_authenticated %}
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url 'chats_app:index' %}">
-                            <img src="{% static 'chats_app/chat-bubble.png' %}" alt="" width="65%" height="65%">
+                            <img src="{% static 'chats_app/chat-bubble.png' %}" alt="chat_room" width="23px" height="23px" title="Enter chat">
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">
+                            <img src="{% static 'userauth/profile-bubble.png' %}" alt="Visit Profile" width="23px" height="23px" title="Visit Profile">
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'userauth:edit_profile' %}">
+                            <img src="{% static 'userauth/edit-profile-bubble.png' %}" alt="Edit Profile" width="23px" height="23px" title="Edit Profile">
                         </a>
                     </li>
                     <li class="nav-item active">
@@ -60,22 +68,4 @@
     <div class="footer" style="background-color: #0d324d;">
         <p>Made with ❤️ using Django</p>
     </div>
-    {% comment %} <!-- Footer -->
-    
-    <footer class="page-footer">
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3" style="background-color: #0d324d; 
-                                                            font-family: 'Courier New', Courier, monospace; 
-                                                            color:#ffffff;
-                                                            left:0;
-                                                            right:0;
-                                                            bottom:0;
-                                                            width:100%;">
-            © 2022 Copyright:
-            <a href="{% url 'chats_app:home' %}"> Shaberi</a>
-            <p>Made with ❤️ using Django</p>
-        </div>
-        <!-- Copyright -->
-    </footer>
-    <!-- Footer --> {% endcomment %}
 </html>

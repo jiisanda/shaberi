@@ -1,0 +1,27 @@
+{% extends 'chats_app/base.html' %}
+{% load static %}
+{% block content %}
+
+<!--CSS Style-->
+<link rel="stylesheet" href="{% static 'userauth/userauth.css' %}">
+
+<div class="card card-edit-profile">
+    {% if user.is_authenticated %}
+    <h1>Edit Profile</h1><br>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary mb-3" id="btn-edit-profile"><span>Save Changes</span></button>
+    </form>
+    {% else %}
+    <p>You are not authorized to view this page...
+        <br>
+        <a href="{% url 'userauth:user_login' %}">Login</a> 
+        or 
+        <a href="{% url 'userauth:register' %}">Register</a> 
+        First...
+    </p>
+    {% endif %}
+</div>
+
+{% endblock content %}

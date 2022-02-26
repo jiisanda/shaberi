@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'channels',
     'userauth',
     'chats_app',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
