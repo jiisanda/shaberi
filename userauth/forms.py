@@ -40,8 +40,8 @@ class EditUserForm(forms.ModelForm):
 class EditProfileForm(forms.ModelForm):
     bio = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Tell us who is writing Shaberi...', 'rows':"2"}), label=False)
     phone_number = PhoneNumberField()
-    # profile_picture = forms.ImageField(widget=forms.FileInput(attrs={'class':'form-control-file'}))
+    profile_picture = forms.ImageField(widget=forms.FileInput(attrs={'class':'form-control-file'}))
 
     class Meta():
         model = Profile
-        fields = ('bio',)
+        fields = ('bio', 'profile_picture')
