@@ -9,6 +9,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from userauth.forms import UserForm, ProfileForm, EditProfileForm, EditUserForm
+from userauth.models import Profile
 
 # Create your views here.
 @login_required
@@ -69,9 +70,10 @@ def registrationView(request):
 
 @login_required
 def edit_profile(request):
+    Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         user_form = EditUserForm(request.POST, instance=request.user)
-        profile_form = EditProfileForm(request.POST, instance=request.user.userprofileinfo)
+        profile_form = EditProfileForm(request.POST, instance=request.user.profile)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -80,7 +82,7 @@ def edit_profile(request):
             return redirect(to='chats_app:home')
     else:
         user_form = EditUserForm(instance=request.user)
-        profile_form = EditProfileForm(instance=request.user.userprofileinfo)
+        profile_form = EditProfileForm(instance=request.user.profile)
     
     return render(request, 'userauth/edit_profile.html', {
         'user_form':user_form,
