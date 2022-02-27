@@ -1,5 +1,3 @@
-from cProfile import label
-from attr import field
 from django.contrib.auth.models import User
 
 from django import forms
@@ -27,14 +25,23 @@ class ProfileForm(forms.ModelForm):
         fields = ('bio', 'phone_number', 'profile_picture')
 
 
-class ProfileEditForm(forms.ModelForm):
+class EditUserForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'First Name*'}), label=False)
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Last Name*'}), label=False)
     username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Username*'}), label=False)
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Email'}), label=False)
+
+
+    class Meta():
+        model = User
+        fields = ('first_name', 'last_name', 'username', 'email')
+
+
+class EditProfileForm(forms.ModelForm):
     bio = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Tell us who is writing Shaberi...', 'rows':"2"}), label=False)
     phone_number = PhoneNumberField()
+    # profile_picture = forms.ImageField(widget=forms.FileInput(attrs={'class':'form-control-file'}))
 
     class Meta():
         model = UserProfileInfo
-        fields = ('first_name', 'last_name', 'username', 'email', 'bio', 'phone_number', 'profile_picture')
+        fields = ('bio',)

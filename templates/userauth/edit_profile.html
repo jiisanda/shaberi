@@ -8,10 +8,27 @@
 <div class="card card-edit-profile">
     {% if user.is_authenticated %}
     <h1>Edit Profile</h1><br>
+    {% comment %} <div class="row my-3 p-3">
+        <img class="rounded-circle account-img" src="{{ user.profile.profile_picture.url }}" style="cursor:pointer;"/>
+    </div> {% endcomment %}
+    {% if user_form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div id="form_errors">
+                {% for key, value in user_form.errors.items %}
+                    <strong>{{ value }}</strong>
+                {% endfor %}
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
         <button type="submit" class="btn btn-primary mb-3" id="btn-edit-profile"><span>Save Changes</span></button>
+        <button type="reset" class="btn btn-dark btn-lg">Reset</button>
     </form>
     {% else %}
     <p>You are not authorized to view this page...

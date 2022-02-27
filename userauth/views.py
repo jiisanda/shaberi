@@ -1,15 +1,14 @@
 from django.http import HttpResponse, HttpResponseRedirect
 
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from django.views.generic import UpdateView
+from django.shortcuts import redirect, render
 
-from django.shortcuts import render
+from django.urls import reverse
 
-from django.urls import reverse, reverse_lazy
-
-from userauth.forms import UserForm, ProfileForm, ProfileEditForm
+from userauth.forms import UserForm, ProfileForm, EditProfileForm, EditUserForm
 
 # Create your views here.
 @login_required
@@ -66,12 +65,24 @@ def registrationView(request):
                             {'user_form':user_form,
                             'profile_form':profile_form,
                             'registered':registered})
-            
-class ProfileEditView(UpdateView):
-    form_class = ProfileEditForm
-    template_name = 'userauth/edit_profile.html'
-    success_url = reverse_lazy('chats_app:home')
 
-    def get_object(self):
-        return self.request.user
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        user_form = EditUserForm(request.POST, instance=request.user)
+        profile_form = EditProfileForm(request.POST, instance=request.user.userprofileinfo)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='chats_app:home')
+    else:
+        user_form = EditUserForm(instance=request.user)
+        profile_form = EditProfileForm(instance=request.user.userprofileinfo)
     
+    return render(request, 'userauth/edit_profile.html', {
+        'user_form':user_form,
+        'profile_form':profile_form,
+    })
