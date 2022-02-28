@@ -3,6 +3,7 @@ chats_app/migrations
 userauth/migrations
 staticfiles
 chats_project/env.py
+userauth/media/profile_pics/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
