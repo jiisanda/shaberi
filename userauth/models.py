@@ -11,7 +11,7 @@ class Profile(models.Model):
     # bio, number, picture
     bio = models.TextField(blank=True, null=True)
     phone_number = PhoneNumberField(unique=True)
-    profile_picture = models.ImageField(upload_to='profile_pics', default='default_profile.png')
+    profile_picture = models.ImageField(upload_to='profile_pics',blank=True, default='profile_pics/default_profile.png')
     
     def __str__(self):
         return str(self.user.username)
