@@ -28,8 +28,9 @@
         {{ user_form.as_p }}
         {{ profile_form.as_p }}
         <button type="submit" class="btn btn-primary mb-3" id="btn-edit-profile"><span>Save Changes</span></button>
-        <button type="reset" class="btn btn-dark btn-lg">Reset</button>
+        <button type="reset" class="btn btn-dark mb-3" id="btn-reset">Reset</button>
     </form>
+    <p><a href="{% url 'userauth:edit_password' %}">Change Password</a></p>
     {% else %}
     <p>You are not authorized to view this page...
         <br>

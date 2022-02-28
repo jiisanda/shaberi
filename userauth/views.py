@@ -3,10 +3,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
 
 from django.shortcuts import redirect, render
 
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from userauth.forms import UserForm, ProfileForm, EditProfileForm, EditUserForm
 from userauth.models import Profile
@@ -88,3 +90,8 @@ def edit_profile(request):
         'user_form':user_form,
         'profile_form':profile_form,
     })
+
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'userauth/change_password.html'
+    success_message = 'Successfully Changed Your Password'
+    success_url = reverse_lazy('chats_app:home')
